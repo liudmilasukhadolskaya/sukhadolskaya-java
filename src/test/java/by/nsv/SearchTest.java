@@ -19,7 +19,7 @@ public class SearchTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Verify the title for the first item")
+    @DisplayName("Ensure a specific item appears in search results")
     public void test1() {
         SearchPage searchPage = new SearchPage();
         searchPage.sendKeysSearch("Мотоцикл Bajaj Boxer BM 125 X - 5 передач (синий)");
