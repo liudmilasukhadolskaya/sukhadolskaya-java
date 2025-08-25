@@ -38,8 +38,7 @@ public class SearchTest extends BaseTest {
         for (String title : results) {
 
             Assertions.assertTrue(title.toLowerCase().contains("мотоцикл"),
-                    "Search result does not contain 'мотоцикл': " + title
-            );
+                    "Search result does not contain 'мотоцикл': " + title);
         }
     }
 

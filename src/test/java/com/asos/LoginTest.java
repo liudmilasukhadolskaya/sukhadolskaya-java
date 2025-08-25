@@ -1,35 +1,38 @@
 package com.asos;
 
-import org.junit.jupiter.api.AfterEach;
+import com.asos.pages.HomePage;
+import com.asos.pages.LoginPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.time.Duration;
-
-public class LoginTest {
+public class LoginTest extends BaseTest {
     WebDriver driver;
 
     @BeforeEach
     public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        HomePage homePage = new HomePage();
+        homePage.openSite();
+        homePage.clickAcceptCookies();
+        homePage.clickAcceptDelivery();
     }
 
     @Test
     public void test1() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.openSite();
+        LoginPage loginPage = new LoginPage();
         loginPage.clickLogIn();
 
         Assertions.assertEquals("Hi friend!", loginPage.getTitleLogInText());
     }
 
-    @AfterEach
-    public void closeBrowser() {
-        driver.quit();
+    @Test
+    public void test2() {
+        LoginPage loginPage = new LoginPage();
+        loginPage.clickLogIn();
+        loginPage.sendKeysEmail("@gmail");
+        loginPage.clickContinue();
+
+        Assertions.assertEquals("Oops! Please type in your correct email address", loginPage.getErrorMsgFromLogin());
     }
 }
